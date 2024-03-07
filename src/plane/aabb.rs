@@ -56,6 +56,19 @@ impl Aabb {
     pub fn half_extents(&self) -> Vec2 {
         (self.maxs - self.mins) * 0.5
     }
+
+    #[inline]
+    pub fn extents(&self) -> Vec2 {
+        self.maxs - self.mins
+    }
+
+    #[inline]
+    pub fn contains(&self, other: &Aabb) -> bool {
+        self.mins.x <= other.mins.x
+            && self.mins.y <= other.mins.y
+            && self.maxs.x >= other.maxs.x
+            && self.maxs.y >= other.maxs.y
+    }
 }
 
 pub fn clip_aabb_line(
